@@ -1,6 +1,8 @@
 #ifndef LIBIOSEXEC_H
 #define LIBIOSEXEC_H
 
+#include <sys/utsname.h>
+
 #define IOSEXEC_PUBLIC __attribute__ ((visibility ("default")))
 #define IOSEXEC_HIDDEN __attribute__ ((visibility ("hidden")))
 
@@ -8,6 +10,7 @@
 extern "C" {
 #endif // __cplusplus
 
+IOSEXEC_PUBLIC int ie_uname(struct utsname* name);
 IOSEXEC_PUBLIC int ie_execl(const char* path, const char* arg0, ...);
 IOSEXEC_PUBLIC int ie_execle(const char* path, const char* arg0, ...);
 IOSEXEC_PUBLIC int ie_execlp(const char* file, const char* arg0, ...);
@@ -74,6 +77,7 @@ IOSEXEC_PUBLIC char *ie_group_from_gid(gid_t, int);
 #      define posix_spawn ie_posix_spawn
 #      define posix_spawnp ie_posix_spawnp
 #      define system ie_system
+#      define uname ie_uname
 
 #      define getpwent ie_getpwent
 #      define getpwuid ie_getpwuid
