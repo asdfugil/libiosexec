@@ -7,3 +7,4 @@ IOSEXEC_HIDDEN void free_new_argv(char** argv);
 
 #define DEFAULT_PATH "@DEFAULT_PATH@"
 #define SHEBANG_REDIRECT_PATH "@SHEBANG_REDIRECT_PATH@"
+

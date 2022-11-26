@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <unistd.h>
 #include "libiosexec.h"
 #include <stdarg.h>
 
@@ -22,6 +23,7 @@ int ie_execl(const char *path, const char *argv0, ...) {
 		return ie_execv(path, argv);
 	}
 }
+DYLD_INTERPOSE(ie_execl, execl);
 
 int ie_execle(const char *path, const char *argv0, ...)
 {
@@ -43,6 +45,7 @@ int ie_execle(const char *path, const char *argv0, ...)
 		return ie_execve(path, argv, envp);
 	}
 }
+DYLD_INTERPOSE(ie_execle, execle);
 
 int ie_execlp(const char *file, const char *argv0, ...) {
 	int argc;
@@ -62,3 +65,4 @@ int ie_execlp(const char *file, const char *argv0, ...) {
 		return ie_execvp(file, argv);
 	}
 }
+DYLD_INTERPOSE(ie_execlp, execlp);

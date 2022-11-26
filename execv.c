@@ -50,10 +50,12 @@ int ie_execve(const char* path, char* const argv[], char* const envp[]) {
     errno = saved_errno;
     return ret;
 }
+DYLD_INTERPOSE(ie_execve, execve);
 
 int ie_execv(const char *path, char *const argv[]) {
     return ie_execve(path, argv, environ);
 }
+DYLD_INTERPOSE(ie_execv, execv);
 
 int ie_execvpe(const char *name, char *const *argv, char *const *envp) {
 	char **memp;
@@ -167,8 +169,10 @@ retry:		(void)ie_execve(bp, argv, envp);
 done:
 	return (-1);
 }
+/* Not a Darwin function */
 
 int ie_execvp(const char *file, char *const argv[])
 {
 	return ie_execvpe(file, argv, environ);
 }
+DYLD_INTERPOSE(ie_execvp, execvp);

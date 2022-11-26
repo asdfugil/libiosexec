@@ -100,7 +100,17 @@ IOSEXEC_PUBLIC char *ie_group_from_gid(gid_t, int);
 #    endif // LIBIOSEXEC_INTERNAL
 #  endif // TARGET_OS_IPHONE
 #endif // __APPLE__
-  
+
+#ifdef LIBIOSEXEC_INTERNAL
+#  if defined(__APPLE__)
+#    define DYLD_INTERPOSE(_replacment,_replacee) \
+       __attribute__((used)) static struct{ const void* replacment; const void* replacee; } _interpose_##_replacee \
+       __attribute__ ((section ("__DATA,__interpose"))) = { (const void*)(unsigned long)&_replacment, (const void*)(unsigned long)&_replacee };
+#  else
+#    define DYLD_INTERPOSE(_replacment,_replacee)
+#  endif
+#endif
+
 #ifdef __cplusplus
 }
 #endif // __cplusplus

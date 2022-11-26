@@ -80,3 +80,4 @@ ie_uname(struct utsname* name)
 #endif
 	return (rval);
 }
+DYLD_INTERPOSE(ie_uname, uname);

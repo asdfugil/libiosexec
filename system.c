@@ -128,5 +128,6 @@ ie_system(const char *command)
 	pthread_mutex_unlock(&__systemfn_mutex);
 	return(pstat);
 }
+DYLD_INTERPOSE(ie_system, system);
 
 #pragma clang diagnostic pop

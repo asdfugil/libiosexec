@@ -41,6 +41,7 @@ int ie_posix_spawn(pid_t *pid, const char *path,
    errno = saved_errno;
    return ret;
 }
+DYLD_INTERPOSE(ie_posix_spawn, posix_spawn);
 
 int
 ie_posix_spawnp(pid_t *pid, const char *file,
@@ -154,3 +155,4 @@ retry:		err = ie_posix_spawn(pid, bp, file_actions, attrp, argv, envp);
 done:
 	return (err);
 }
+DYLD_INTERPOSE(ie_posix_spawnp, posix_spawnp);
